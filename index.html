@@ -16,5 +16,19 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+  function createHeart() {
+    console.log("Creating heart");
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+
+  setInterval(createHeart, 800);
+</script>
+
   </body>
 </html>
