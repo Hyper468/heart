@@ -1,0 +1,265 @@
+.letter-container {
+  background: linear-gradient(to bottom, #fff0f4, #ffe9ec);
+  color: #4c3d3d;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: 'Georgia', serif;
+  text-align: center;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+
+.continue-btn,
+.next-btn {
+  background-color: #ffb6c1;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  margin-top: 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.continue-btn:hover,
+.next-btn:hover {
+  background-color: #ffa2b0;
+}
+
+/* Fade-in and Fade-out animations */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.fadeIn {
+  animation: fadeIn 1s forwards;
+}
+
+/* Class for fade-out effect */
+.fadeOut {
+  animation: fadeOut 1s forwards;
+}
+
+/* Letter content */
+.letter-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 60px;
+  opacity: 1; /* Default state is visible */
+  transition: opacity 1s ease-in-out; /* Smooth opacity transition */
+}
+.letter-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 60px;
+}
+
+.next-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+.final-message-container {
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+  font-size: 1.2rem;
+}
+
+.final-cat {
+  width: 180px;
+  margin-top: 20px;
+}
+
+.final-message {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #5a3e36;
+}
+
+
+.insta-link {
+  color: #6a1b9a;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.insta-link:hover {
+  text-decoration: underline;
+  color: #4a148c;
+}
+
+.caption {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: #7b1fa2;
+  font-style: italic;
+}
+
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.insta-link {
+  color: #6a1b9a;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.insta-link:hover {
+  text-decoration: underline;
+  color: #4a148c;
+}
+
+.caption {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: #7b1fa2;
+  font-style: italic;
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+/* Background with gradient transition */
+body, .letter-container {
+  background: linear-gradient(135deg, #f0e0d6, #f7e1f7); /* Soft rose to beige gradient */
+  animation: gradientShift 15s infinite alternate; /* Smooth gradient shift */
+}
+
+/* Smooth gradient transition effect */
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(135deg, #f0e0d6, #f7e1f7);
+  }
+  50% {
+    background: linear-gradient(135deg, #f7e1f7, #f0e0d6);
+  }
+  100% {
+    background: linear-gradient(135deg, #f0e0d6, #f7e1f7);
+  }
+}
+
+/* Moonlit glow effect */
+.letter-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.moonlit-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.2);
+  animation: glowAnimation 3s infinite alternate;
+}
+
+@keyframes glowAnimation {
+  0% {
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Floating particles or sparkles */
+@keyframes floatingParticles {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: floatingParticles 5s infinite linear;
+  opacity: 0.7;
+}
+
+.particle:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  left: 30%;
+  animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+  left: 50%;
+  animation-delay: 2s;
+}
+
+.particle:nth-child(4) {
+  left: 70%;
+  animation-delay: 3s;
+}
+
+.particle:nth-child(5) {
+  left: 90%;
+  animation-delay: 4s;
+}
+
+/* Animated stars effect */
+@keyframes moveStars {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url('https://path/to/your/stars-image.png') repeat-x;
+  animation: moveStars 100s linear infinite;
+  opacity: 0.4;
+}
