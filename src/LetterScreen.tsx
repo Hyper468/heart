@@ -40,7 +40,7 @@ const LetterSection: React.FC = () => {
   const handleContinue = () => {
     setShowIntro(false);
     if (audioRef.current) {
-      audioRef.current.volume = 0.05;
+      audioRef.current.volume = 0.08;
       audioRef.current.play().catch((e) => console.log("Audio play error:", e));
     }
   };
