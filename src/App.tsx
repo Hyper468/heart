@@ -15,6 +15,7 @@ function App() {
   const handleGameEnd = () => {
     setScreen("done");
   };
+
   useEffect(() => {
     const audio = document.getElementById("bg-music") as HTMLAudioElement;
     if (audio) {
@@ -23,7 +24,7 @@ function App() {
       audio.currentTime = 0;
     }
   }, []);
-  
+
   useEffect(() => {
     const container = document.querySelector(".app-container");
 
@@ -49,7 +50,7 @@ function App() {
           type="audio/mpeg"
         />
       </audio>
-      
+
       {screen === "intro" && (
         <div className="message-screen">
           <p className="intro-message">
@@ -86,42 +87,50 @@ function App() {
         </div>
       )}
 
-{screen === "poemIntro" && (
-  <div className="message-screen">
-    <p className="intro-message">
-      I wrote something for you… <br />
-      Something from the heart.
-    </p>
-    <button
-      className="continue-button"
-      onClick={() => {
-        // ✅ prevent re-triggering audio
-        if (!startedPoemMusic) {
-          setStartedPoemMusic(true);
+      {screen === "poemIntro" && (
+        <div className="message-screen">
+          <p className="intro-message">
+            I wrote something for you… <br />
+            Something from the heart.
+          </p>
+          <button
+            className="continue-button"
+            onClick={() => {
+              if (!startedPoemMusic) {
+                setStartedPoemMusic(true);
 
-          const audio = document.getElementById("bg-music") as HTMLAudioElement;
-          if (audio) {
-            audio.volume = 0;
-            audio.play().catch((e) => console.log("Audio play error:", e));
-            let volume = 0;
-            const fadeIn = setInterval(() => {
-              if (volume < 0.08) {
-                volume += 0.08;
-                audio.volume = volume;
-              } else {
-                clearInterval(fadeIn);
+                const audio = document.getElementById("bg-music") as HTMLAudioElement;
+                if (audio) {
+                  audio.volume = 0;
+                  const playPromise = audio.play();
+
+                  if (playPromise !== undefined) {
+                    playPromise
+                      .then(() => {
+                        let volume = 0;
+                        const fadeIn = setInterval(() => {
+                          if (volume < 0.2) {
+                            volume += 0.01;
+                            audio.volume = Math.min(volume, 0.2);
+                          } else {
+                            clearInterval(fadeIn);
+                          }
+                        }, 200);
+                      })
+                      .catch((error) => {
+                        console.log("Audio play error:", error);
+                      });
+                  }
+                }
+
+                setScreen("poem");
               }
-            }, 200);
-          }
-        }
-
-        setScreen("poem");
-      }}
-    >
-      Continue
-    </button>
-  </div>
-)}
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      )}
 
       {screen === "poem" && (
         <PoemScreen
@@ -131,8 +140,6 @@ function App() {
               poemAudio.pause();
               poemAudio.currentTime = 0;
             }
-
-        
 
             setScreen("letter");
           }}
