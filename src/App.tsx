@@ -106,7 +106,7 @@ function App() {
             let volume = 0;
             const fadeIn = setInterval(() => {
               if (volume < 0.075) {
-                volume += 0.005;
+                volume += 0.08;
                 audio.volume = volume;
               } else {
                 clearInterval(fadeIn);
