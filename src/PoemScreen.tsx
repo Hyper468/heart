@@ -111,7 +111,7 @@ const PoemScreen = ({ onPoemEnd }: { onPoemEnd: () => void }) => {
   
         return nextIndex;
       });
-    }, 100); // show new pair every 4 seconds
+    }, 4000); // show new pair every 4 seconds
   
     return () => clearInterval(interval);
   }, [onPoemEnd]);
