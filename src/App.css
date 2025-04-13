@@ -1,21 +1,28 @@
 .app-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Prevents scrolling */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff8f3;
-  height: 100vh;
-  padding: 10px;
-  font-family: 'Segoe UI', sans-serif;
-}
-.floating-heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center center / contain;
-  animation: floatUp 5s linear infinite;
-  opacity: 0.7;
+  background: #fffafc;
+  position: relative; /* To be able to position floating hearts within it */
 }
 
+/* Floating Hearts - Absolute Positioning */
+.floating-heart {
+  position: absolute; /* Keeps hearts in random positions relative to their container */
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png')
+    no-repeat center center / contain;
+  animation: floatUp 5s linear infinite;
+  opacity: 0.7;
+  pointer-events: none; /* Prevents interaction with hearts */
+  z-index: 1; /* Ensures hearts stay behind content */
+}
+
+/* Keyframe for floating hearts animation */
 @keyframes floatUp {
   0% {
     transform: translateY(100vh) scale(0.6);
@@ -29,6 +36,17 @@
     opacity: 0;
   }
 }
+
+/* Random position generator for the hearts (CSS only) */
+@keyframes randomPosition {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 
 .message-screen {
   background: #fff0ea;
