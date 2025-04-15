@@ -171,7 +171,7 @@
   max-width: 100%; /* Prevents overflow on small screens */
   width: 100%;
   text-align: center;
-  animation: fadeInOut 4s ease-in-out infinite;
+  animation: fadeInOut 5s ease-in-out infinite;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
   padding: 0 0px; /* Optional, for extra breathing room */
   word-wrap: break-word;
