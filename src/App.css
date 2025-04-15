@@ -164,7 +164,7 @@
   transition: background 1s ease-in-out;
 }
 .poem-lines {
-  font-family: 'Caveat', cursive;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 1.4rem;
   color: #F5F5F5;
   line-height: 2.2rem;
