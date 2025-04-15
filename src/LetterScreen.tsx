@@ -1,6 +1,7 @@
 import LetterScreen from "./LetterScreen";
 import React, { useState, useRef, useEffect } from "react";
 import "./LetterScreen.css";
+
 import catImage from './assets/cat.png'; // adjust the path if needed
 
 const paragraphs = [
@@ -40,7 +41,7 @@ const LetterSection: React.FC = () => {
   const handleContinue = () => {
     setShowIntro(false);
     if (audioRef.current) {
-      audioRef.current.volume = 0.08;
+      audioRef.current.volume = 0.05;
       audioRef.current.play().catch((e) => console.log("Audio play error:", e));
     }
   };
@@ -66,13 +67,14 @@ const LetterSection: React.FC = () => {
     setShowCatScreen(true);
     setFinalScreenStep(0);
    
-  if (finalSongRef.current) {
-    finalSongRef.current.pause(); // Just in case it's already playing
-    finalSongRef.current.currentTime = 0;
-    finalSongRef.current.volume = 0.2; // Set volume BEFORE play()
-    finalSongRef.current.play().catch((e) => console.log("Play error:", e));
-  }
-};
+    if (finalSongRef.current) {
+      finalSongRef.current.pause(); // Just in case it's already playing
+      finalSongRef.current.currentTime = 0;
+      finalSongRef.current.volume = 0.2; // Set volume BEFORE play()
+      finalSongRef.current.play().catch((e) => console.log("Play error:", e));
+    }
+  };
+
   useEffect(() => {
     if (!showCatScreen || finalScreenStep > 5) return;
 
@@ -86,70 +88,71 @@ const LetterSection: React.FC = () => {
   }, [finalScreenStep, showCatScreen]);
 
   return (
-    
-    <div className="letter-container">
-      {showIntro ? (
-        <div className="intro">
-          <p>Read this, not with your mind, but the heart that once smiled with mine</p>
-          <p>A letter from the soul, for the one who felt it all</p>
-          <button className="continue-btn" onClick={handleContinue}>Continue</button>
-        </div>
-      ) : showFinalMessage ? (
-        <div className="message-screen">
-          <p className="intro-message">In short, I just want to say is…</p>
-          <button className="continue-button" onClick={handleFinalContinue}>Continue</button>
-        </div>
-      ) : showCatScreen ? (
-        <div className="final-screen">
-          <div className="cat-and-messages">
-            {finalScreenStep >= 0 && (
-              <img src={catImage} alt="Cat holding flowers" className="final-cat fade-in" />
+    <div className={`letter-container ${!showIntro && !showFinalMessage ? 'show-background' : ''}`}>
+    {showIntro ? (
+      <div className="intro">
+        <p>Read this, not with your mind, but the heart that once smiled with mine</p>
+        <p>A letter from the soul, for the one who felt it all</p>
+        <button className="continue-btn" onClick={handleContinue}>Continue</button>
+      </div>
+    ) : showFinalMessage ? (
+      <div className="message-screen">
+        <p className="intro-message">In short, I just want to say is…</p>
+        <button className="continue-button" onClick={handleFinalContinue}>Continue</button>
+      </div>
+    ) : showCatScreen ? (
+      <div className="final-screen">
+        <div className="cat-and-messages">
+          {finalScreenStep >= 0 && (
+            <img src={catImage} alt="Cat holding flowers" className="final-cat fade-in" />
+          )}
+          <div className="final-lines">
+            {finalScreenStep >= 1 && (
+              <p className="final-message fade-in">Can't wait to give you the real ones 🌻❤️.</p>
             )}
-            <div className="final-lines">
-              {finalScreenStep >= 1 && (
-                <p className="final-message fade-in">Can't wait to give you the real ones 🌻❤️.</p>
-              )}
-              {finalScreenStep >= 2 && (
-                <p className="final-message fade-in">Hope this makes you smile.</p>
-              )}
-              {finalScreenStep >= 3 && (
-                <p className="final-message fade-in">
-                  And by any chance… if you liked it enough to open the window a little more...
-                </p>
-              )}
-              {finalScreenStep >= 4 && (
-                <p className="fade-in">
-                  <a
-                    href="https://instagram.com/anandt540"
-                    className="insta-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Click here
-                  </a>
-                </p>
-              )}
-              {finalScreenStep >= 5 && (
-                <p className="caption fade-in">(my request is still pending🙇‍♂️😁)</p>
-              )}
-            </div>
+            {finalScreenStep >= 2 && (
+              <p className="final-message fade-in">Hope this makes you smile.</p>
+            )}
+            {finalScreenStep >= 3 && (
+              <p className="final-message fade-in">
+                And by any chance… if you liked it enough to open the window a little more...
+              </p>
+            )}
+            {finalScreenStep >= 4 && (
+              <p className="fade-in">
+                <a
+                  href="https://instagram.com/anandt540"
+                  className="insta-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Click here
+                </a>
+              </p>
+            )}
+            {finalScreenStep >= 5 && (
+              <p className="caption fade-in">(my request is still pending🙇‍♂️😁)</p>
+            )}
           </div>
         </div>
-      ) : (
-        <div className="letter-content">
-          <p className={`letter-paragraph ${fadeClass}`}>{paragraphs[currentIndex]}</p>
-          <button className="next-btn" onClick={handleNext}>
-            {currentIndex === paragraphs.length - 1 ? "Finish Letter" : "Next"}
-          </button>
-        </div>
-      )}
-
-      {/* Background Music */}
-      <audio ref={audioRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgMusic.mp3" loop />
-      {/* Final Cat Screen Song */}
-      <audio ref={finalSongRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgSongA.mp3" loop />
-    </div>
+      </div>
+    ) : (
+      <div className="letter-content">
+        <p className={`letter-paragraph ${fadeClass}`}>{paragraphs[currentIndex]}</p>
+        <button className="next-btn" onClick={handleNext}>
+          {currentIndex === paragraphs.length - 1 ? "Finish Letter" : "Next"}
+        </button>
+      </div>
+    )}
+  
+    {/* Background Music */}
+    <audio ref={audioRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgMusic.mp3" loop />
+    {/* Final Cat Screen Song */}
+    <audio ref={finalSongRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgSongA.mp3" loop />
+  </div>
+  
   );
 };
 
 export default LetterSection;
+
