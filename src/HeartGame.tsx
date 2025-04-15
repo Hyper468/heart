@@ -1,16 +1,32 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./HeartGame.css";
 
 const HeartGame: React.FC<{ onGameEnd: () => void }> = ({ onGameEnd }) => {
   const basketRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const popSoundRef = useRef<HTMLAudioElement>(null); // Using this for the sound
+
   const [score, setScore] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
+
+  // Function to play the pop sound
+  const playPopSound = () => {
+    if (popSoundRef.current) {
+      popSoundRef.current.currentTime = 0;
+      popSoundRef.current.play();
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setShowInstructions(false), 8000);
     return () => clearTimeout(timer);
   }, []);
-  
+  useEffect(() => {
+   
+    if (popSoundRef.current) {
+      popSoundRef.current.volume = 0.3; 
+    }
+  }, []);
   useEffect(() => {
     const container = containerRef.current;
 
@@ -68,6 +84,7 @@ const HeartGame: React.FC<{ onGameEnd: () => void }> = ({ onGameEnd }) => {
                 if (newScore === 10) {
                   onGameEnd();
                 }
+                playPopSound(); // Play sound when heart is caught
                 return newScore;
               });
             }
@@ -94,21 +111,27 @@ const HeartGame: React.FC<{ onGameEnd: () => void }> = ({ onGameEnd }) => {
   }, [onGameEnd]);
 
   return (
-    <div className="game-container" ref={containerRef}>
+    <>
+      {/* Instructions */}
       {showInstructions && (
-  <div className="game-instructions">
-    💖 Move the basket with your finger or mouse to catch the falling hearts!
-  </div>
-)}
+        <div className="game-instructions">
+          💖 Move the basket with your finger or mouse to catch the falling hearts!
+        </div>
+      )}
 
-      <img
-        ref={basketRef}
-        src="https://i.ibb.co/rfXyy46T/Pngtree-wicker-four-corners-basket-clip-5805028.png"
-        alt="basket"
-        className="basket"
-      />
-      <div className="score">❤️ {score}</div>
-    </div>
+      <div className="game-container" ref={containerRef}>
+        <img
+          ref={basketRef}
+          src="https://i.ibb.co/rfXyy46T/Pngtree-wicker-four-corners-basket-clip-5805028.png"
+          alt="basket"
+          className="basket"
+        />
+        <div className="score">❤️ {score}</div>
+      </div>
+
+      {/* Pop sound effect */}
+      <audio ref={popSoundRef} src="/assets/sounds/pop.mp3" preload="auto" />
+    </>
   );
 };
 
