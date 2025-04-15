@@ -115,7 +115,7 @@ const HeartGame: React.FC<{ onGameEnd: () => void }> = ({ onGameEnd }) => {
       {/* Instructions */}
       {showInstructions && (
         <div className="game-instructions">
-          💖 Move the basket with your finger or mouse to catch the falling hearts!
+          💖 Move the basket with your finger to catch the falling hearts!
         </div>
       )}
 
