@@ -1,3 +1,4 @@
+
 .app-container {
   width: 100vw;
   height: 100vh;
@@ -46,7 +47,6 @@
     left: 100%;
   }
 }
-
 
 .message-screen {
   background: #fff0ea;
@@ -115,7 +115,8 @@
   align-items: center;
 }
 
-.intro-message, .end-message {
+.intro-message,
+.end-message {
   font-size: 1.2rem;
   color: #4b2e2e;
   margin-bottom: 1.5rem;
@@ -148,23 +149,35 @@
   }
 }
 .poem-screen {
+  background-image: url('https://raw.githubusercontent.com/Hyper468/mp3host/main/photo_2025-04-15_16-24-57.jpg');
+  background-size: cover;
+  background-position: center;
   height: 100vh;
-  background-color: #fdf6f8;
+  color: #F5F5F5;
+  font-family: 'Caveat', cursive;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
+  padding: 3.5rem;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  transition: background 1s ease-in-out;
+}
+.poem-lines {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: #F5F5F5;
+  line-height: 2.2rem;
+  max-width: 100%; /* Prevents overflow on small screens */
+  width: 100%;
+  text-align: center;
+  animation: fadeInOut 4s ease-in-out infinite;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  padding: 0 0px; /* Optional, for extra breathing room */
+  word-wrap: break-word;
+  box-sizing: border-box;
 }
 
-.poem-lines {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 1.4rem;
-  color: #4B2E2E;
-  line-height: 2.2rem;
-  max-width: 100%;
-  animation: fadeInOut 4s ease-in-out infinite;
-}
 
 @keyframes fadeInOut {
   0% {
