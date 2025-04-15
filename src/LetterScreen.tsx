@@ -110,9 +110,15 @@ const LetterSection: React.FC = () => {
             {finalScreenStep >= 1 && (
               <p className="final-message fade-in">Can't wait to give you the real ones 🌻❤️.</p>
             )}
-            {finalScreenStep >= 2 && (
-              <p className="final-message fade-in">Hope this makes you smile.</p>
-            )}
+           {finalScreenStep >= 2 && (
+  <>
+    <p className="final-message fade-in">
+      Even if your heart builds walls so high that the sky forgets your name — I’ll still leave flowers at the gate every day, just in case your soul remembers who stayed when the world moved on.
+    </p>
+    <p className="final-message fade-in">Hope this makes you smile.</p>
+  </>
+)}
+
             {finalScreenStep >= 3 && (
               <p className="final-message fade-in">
                 And by any chance… if you liked it enough to open the window a little more...
