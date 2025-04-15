@@ -130,7 +130,7 @@ const HeartGame: React.FC<{ onGameEnd: () => void }> = ({ onGameEnd }) => {
       </div>
 
       {/* Pop sound effect */}
-      <audio ref={popSoundRef} src="/assets/sounds/pop.mp3" preload="auto" />
+      <audio ref={popSoundRef} src="https://github.com/Hyper468/heart/raw/refs/heads/master/pop.mp3" preload="auto" />
     </>
   );
 };
