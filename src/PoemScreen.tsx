@@ -105,13 +105,13 @@ const PoemScreen = ({ onPoemEnd }: { onPoemEnd: () => void }) => {
           clearInterval(interval);
           setTimeout(() => {
             onPoemEnd();
-          }, 4000); // give time to read the final lines
+          }, 5000); // give time to read the final lines
           return prev; // keep showing the last pair
         }
   
         return nextIndex;
       });
-    }, 4000); // show new pair every 4 seconds
+    }, 5000); // show new pair every 4 seconds
   
     return () => clearInterval(interval);
   }, [onPoemEnd]);
