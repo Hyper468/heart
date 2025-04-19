@@ -131,15 +131,16 @@ const LetterSection: React.FC = () => {
         </div>
       ) : showVideoPlayer ? (
         <div className="video-screen">
-         <video
+     <video
   ref={videoRef}
   src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/Timeline%201.mp4"
   controls={false}
   muted
-  preload="auto"
+  playsInline
   onEnded={handleVideoEnded}
   className="video-player"
 />
+
         </div>
       ) : showFinalMessage ? (
         <div className="message-screen">
