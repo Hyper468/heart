@@ -145,7 +145,7 @@ const LetterSection: React.FC = () => {
       ) : showFinalMessage ? (
         <div className="message-screen">
           <p className="intro-message">In short, I just want to say is…</p>
-          <p>rotate you phone back</p>
+          <p className="intro-message">rotate you phone vertical</p>
           <button className="continue-button" onClick={handleFinalContinue}>Continue</button>
         </div>
       ) : showCatScreen ? (
