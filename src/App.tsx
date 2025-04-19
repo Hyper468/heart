@@ -108,7 +108,7 @@ function App() {
             audio.play().catch((e) => console.log("Audio play error:", e));
             let volume = 0;
             const fadeIn = setInterval(() => {
-              if (volume < 0.085) {
+              if (volume < 0.09) {
                 volume += 0.008;
                 audio.volume = volume;
               } else {
