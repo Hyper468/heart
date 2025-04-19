@@ -133,7 +133,7 @@ const LetterSection: React.FC = () => {
         <div className="video-screen">
      <video
   ref={videoRef}
-  src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/Timeline%201.mp4"
+  src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/Timeline%201%20(1).mp4"
   controls={false}
   muted
   playsInline
