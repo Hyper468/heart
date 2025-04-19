@@ -99,7 +99,7 @@ const LetterSection: React.FC = () => {
     if (finalSongRef.current) {
       finalSongRef.current.pause();
       finalSongRef.current.currentTime = 0;
-      finalSongRef.current.volume = 0.2;
+      finalSongRef.current.volume = 0.25;
       finalSongRef.current.play().catch((e) => console.log("Play error:", e));
     }
   };
