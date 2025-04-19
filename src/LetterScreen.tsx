@@ -33,12 +33,15 @@ const LetterSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fadeClass, setFadeClass] = useState("fadeIn");
   const [showIntro, setShowIntro] = useState(true);
+  const [showVideoPrompt, setShowVideoPrompt] = useState(false);
+  const [showVideoPlayer, setShowVideoPlayer] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
   const [showCatScreen, setShowCatScreen] = useState(false);
   const [finalScreenStep, setFinalScreenStep] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const finalSongRef = useRef<HTMLAudioElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleContinue = () => {
     setShowIntro(false);
@@ -55,7 +58,8 @@ const LetterSection: React.FC = () => {
         setCurrentIndex(currentIndex + 1);
         setFadeClass("fadeIn");
       } else {
-        setShowFinalMessage(true);
+        // After letter ends, show "Rotate your phone" + Play button
+        setShowVideoPrompt(true);
         if (audioRef.current) {
           audioRef.current.pause();
           audioRef.current.currentTime = 0;
@@ -64,15 +68,38 @@ const LetterSection: React.FC = () => {
     }, 1000);
   };
 
+  const handlePlayVideo = () => {
+    setShowVideoPrompt(false);
+    setShowVideoPlayer(true);
+  
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = true; // Start muted to satisfy autoplay
+        videoRef.current.play()
+          .then(() => {
+            videoRef.current.muted = false; // Unmute after play starts
+          })
+          .catch((e) => console.log("Video play error:", e));
+      }
+    }, 100);
+  };
+  
+  
+
+  const handleVideoEnded = () => {
+    setShowVideoPlayer(false);
+    setShowFinalMessage(true);
+  };
+
   const handleFinalContinue = () => {
     setShowFinalMessage(false);
     setShowCatScreen(true);
     setFinalScreenStep(0);
-   
+
     if (finalSongRef.current) {
-      finalSongRef.current.pause(); // Just in case it's already playing
+      finalSongRef.current.pause();
       finalSongRef.current.currentTime = 0;
-      finalSongRef.current.volume = 0.2; // Set volume BEFORE play()
+      finalSongRef.current.volume = 0.2;
       finalSongRef.current.play().catch((e) => console.log("Play error:", e));
     }
   };
@@ -90,77 +117,91 @@ const LetterSection: React.FC = () => {
   }, [finalScreenStep, showCatScreen]);
 
   return (
-    <div className={`letter-container ${!showIntro && !showFinalMessage ? 'show-background' : ''}`}>
-    {showIntro ? (
-      <div className="intro">
-        <p>Read this, not with your mind, but the heart that once smiled with mine</p>
-        <p>A letter from the soul, for the one who felt it all</p>
-        <button className="continue-btn" onClick={handleContinue}>Continue</button>
-      </div>
-    ) : showFinalMessage ? (
-      <div className="message-screen">
-        <p className="intro-message">In short, I just want to say is…</p>
-        <button className="continue-button" onClick={handleFinalContinue}>Continue</button>
-      </div>
-    ) : showCatScreen ? (
-      <div className="final-screen">
-        <div className="cat-and-messages">
-          {finalScreenStep >= 0 && (
-            <img src={catImage} alt="Cat holding flowers" className="final-cat fade-in" />
-          )}
-          <div className="final-lines">
-            {finalScreenStep >= 1 && (
-              <p className="final-message fade-in">Can't wait to give you the real ones 🌻❤️.</p>
+    <div className={`letter-container ${!showIntro && !showFinalMessage && !showVideoPrompt && !showVideoPlayer ? 'show-background' : ''}`}>
+      {showIntro ? (
+        <div className="intro">
+          <p>Read this, not with your mind, but the heart that once smiled with mine</p>
+          <p>A letter from the soul, for the one who felt it all</p>
+          <button className="continue-btn" onClick={handleContinue}>Continue</button>
+        </div>
+      ) : showVideoPrompt ? (
+        <div className="message-screen">
+          <p className="intro-message">Rotate your phone 📱</p>
+          <button className="continue-button" onClick={handlePlayVideo}>Play Video</button>
+        </div>
+      ) : showVideoPlayer ? (
+        <div className="video-screen">
+         <video
+  ref={videoRef}
+  src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/Timeline%201.mp4"
+  controls={false}
+  muted
+  preload="auto"
+  onEnded={handleVideoEnded}
+  className="video-player"
+/>
+        </div>
+      ) : showFinalMessage ? (
+        <div className="message-screen">
+          <p className="intro-message">In short, I just want to say is…</p>
+          <button className="continue-button" onClick={handleFinalContinue}>Continue</button>
+        </div>
+      ) : showCatScreen ? (
+        <div className="final-screen">
+          <div className="cat-and-messages">
+            {finalScreenStep >= 0 && (
+              <img src={catImage} alt="Cat holding flowers" className="final-cat fade-in" />
             )}
-           {finalScreenStep >= 2 && (
-  <>
-    <p className="final-message fade-in">
-      Even if your heart builds walls so high that the sky forgets your name, I’ll still leave flowers at the gate every day, just in case your soul remembers who stayed when the world moved on.
-    </p>
-    <p className="final-message fade-in">Hope this makes you smile.</p>
-  </>
-)}
-
-            {finalScreenStep >= 3 && (
-              <p className="final-message fade-in">
-                And by any chance… if you liked it enough to open the window a little more...
-              </p>
-            )}
-            {finalScreenStep >= 4 && (
-              <p className="fade-in">
-                <a
-                  href="https://instagram.com/anandt540"
-                  className="insta-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Click here
-                </a>
-              </p>
-            )}
-            {finalScreenStep >= 5 && (
-              <p className="caption fade-in">(my request is still pending🙇‍♂️😁)</p>
-            )}
+            <div className="final-lines">
+              {finalScreenStep >= 1 && (
+                <p className="final-message fade-in">Can't wait to give you the real ones 🌻❤️.</p>
+              )}
+              {finalScreenStep >= 2 && (
+                <>
+                  <p className="final-message fade-in">
+                    Even if your heart builds walls so high that the sky forgets your name, I’ll still leave flowers at the gate every day, just in case your soul remembers who stayed when the world moved on.
+                  </p>
+                  <p className="final-message fade-in">Hope this makes you smile.</p>
+                </>
+              )}
+              {finalScreenStep >= 3 && (
+                <p className="final-message fade-in">
+                  And by any chance… if you liked it enough to open the window a little more...
+                </p>
+              )}
+              {finalScreenStep >= 4 && (
+                <p className="fade-in">
+                  <a
+                    href="https://instagram.com/anandt540"
+                    className="insta-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Click here
+                  </a>
+                </p>
+              )}
+              {finalScreenStep >= 5 && (
+                <p className="caption fade-in">(my request is still pending🙇‍♂️😁)</p>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    ) : (
-      <div className="letter-content">
-        <p className={`letter-paragraph ${fadeClass}`}>{paragraphs[currentIndex]}</p>
-        <button className="next-btn" onClick={handleNext}>
-          {currentIndex === paragraphs.length - 1 ? "Finish Letter" : "Next"}
-        </button>
-      </div>
-    )}
-  
-    {/* Background Music */}
-    <audio ref={audioRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgMusic.mp3" loop />
-    {/* Final Cat Screen Song */}
-    <audio ref={finalSongRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgSongA.mp3" loop />
-  </div>
-  
+      ) : (
+        <div className="letter-content">
+          <p className={`letter-paragraph ${fadeClass}`}>{paragraphs[currentIndex]}</p>
+          <button className="next-btn" onClick={handleNext}>
+            {currentIndex === paragraphs.length - 1 ? "Finish Letter" : "Next"}
+          </button>
+        </div>
+      )}
+
+      {/* Background Music */}
+      <audio ref={audioRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgMusic.mp3" loop />
+      {/* Final Cat Screen Song */}
+      <audio ref={finalSongRef} src="https://github.com/Hyper468/mp3host/raw/refs/heads/main/BgSongA.mp3" loop />
+    </div>
   );
 };
 
 export default LetterSection;
-
