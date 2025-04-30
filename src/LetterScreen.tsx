@@ -22,7 +22,7 @@ const paragraphs = [
   "Your love was my calm, my place of quiet safety. And if there's one thing I miss the most, it’s the way your heart made space for mine. Each of those moments wasn’t just a memory, it was love in its raw, most beautiful form.",
   "I carry them with me still, like bookmarks to the happiest chapters of my life. And no matter how far we’ve drifted, those memories remain warm, untouched by time.",
   "You hold the pen now. The story from here is yours to write. I don't want to feel you any pressure, just a reminder that you meant something truly special to me.",
-  "Even from a distance, you still reach me. Like the moon touches the sea, your reflection—your presence—stirs something deep in me.",
+  "Even from a distance, you still reach me. Like the moon touches the sea, your reflection, your presence, stirs something deep in me.",
   "You may not see it, but I still feel every moment, every memory. I’m not chasing you, just waiting quietly, truly, like I always said I would. My heart’s holding on to what once felt like home.",
   "If there’s even a small window left open, I’ll keep sending pieces of my heart through it. If that door shuts, I’ll understand, but till then…",
   "Even after all this time, these two long, quiet months, my heart knows only one direction, it still beats quietly, steadily, for you.",
