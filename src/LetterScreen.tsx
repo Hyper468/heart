@@ -92,17 +92,26 @@ const LetterSection: React.FC = () => {
   };
 
   const handleFinalContinue = () => {
-    setShowFinalMessage(false);
-    setShowCatScreen(true);
-    setFinalScreenStep(0);
+  setShowFinalMessage(false);
+  setShowCatScreen(true);
+  setFinalScreenStep(0);
 
+  setTimeout(() => {
     if (finalSongRef.current) {
-      finalSongRef.current.pause();
-      finalSongRef.current.currentTime = 0;
-      finalSongRef.current.volume = 0.25;
-      finalSongRef.current.play().catch((e) => console.log("Play error:", e));
+      try {
+        finalSongRef.current.pause();
+        finalSongRef.current.currentTime = 0;
+        finalSongRef.current.volume = 0.25;
+        finalSongRef.current.play().catch((e) =>
+          console.log("Play error:", e)
+        );
+      } catch (e) {
+        console.error("Playback failed:", e);
+      }
     }
-  };
+  }, 100); // Delay ensures audio tag is mounted
+};
+
 
   useEffect(() => {
     if (!showCatScreen || finalScreenStep > 5) return;
